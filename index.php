@@ -1,5 +1,7 @@
 <?php
 echo '<!DOCTYPE html>';
+include 'db.php';
+echo "Veritabanı bağlantısı başarılı!";
 ?>
 
 <!doctype html>

@@ -1,3 +1,7 @@
+<?php
+echo '<!DOCTYPE html>';
+?>
+
 <!doctype html>
 <html lang="tr">
     <head>
@@ -23,9 +27,9 @@
         <link href="css/templatemo-barber-shop.css" rel="stylesheet">
 <!--
 
-TemplateMo 585 Barber Shop
 
-https://templatemo.com/tm-585-barber-shop
+
+
 
 -->
     </head>

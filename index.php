@@ -1,7 +1,41 @@
 <?php
-echo '<!DOCTYPE html>';
 include 'db.php';
-echo "Veritabanı bağlantısı başarılı!";
+
+$mesaj = "";
+
+// Form gönderildi mi kontrol et
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Form verilerini al ve güvenli hale getir
+    $ad = htmlspecialchars($_POST['bb-name']);
+    $tel = htmlspecialchars($_POST['bb-phone']);
+    $saat = htmlspecialchars($_POST['bb-time']);
+    $sube = htmlspecialchars($_POST['bb-branch']);
+    $tarih = htmlspecialchars($_POST['bb-date']);
+    $kisi = htmlspecialchars($_POST['bb-number']);
+    $not = htmlspecialchars($_POST['bb-message']);
+
+    // Veritabanına ekleme sorgusu
+    $sql = "INSERT INTO randevular (ad_soyad, telefon, randevu_saati, sube, randevu_tarihi, kisi_sayisi, mesaj) 
+            VALUES (:ad, :tel, :saat, :sube, :tarih, :kisi, :not)";
+    
+    $stmt = $pdo->prepare($sql);
+    
+    $sonuc = $stmt->execute([
+        ':ad' => $ad,
+        ':tel' => $tel,
+        ':saat' => $saat,
+        ':sube' => $sube,
+        ':tarih' => $tarih,
+        ':kisi' => $kisi,
+        ':not' => $not
+    ]);
+
+    if ($sonuc) {
+        $mesaj = "<div class='alert alert-success'>Randevunuz başarıyla oluşturuldu! Sizi arayacağız.</div>";
+    } else {
+        $mesaj = "<div class='alert alert-danger'>Bir hata oluştu, lütfen tekrar deneyin.</div>";
+    }
+}
 ?>
 
 <!doctype html>

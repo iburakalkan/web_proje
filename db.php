@@ -1,14 +1,14 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "12345678"; // XAMPP varsayılan şifresi boştur
-$dbname = "barber_db";
+$host = 'localhost';
+$dbname = 'berber_db';
+$username = 'root'; // Veritabanı kullanıcı adın
+$password = '';     // Veritabanı şifren
 
-// Bağlantıyı oluştur
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Bağlantıyı kontrol et
-if ($conn->connect_error) {
-    die("Bağlantı hatası: " . $conn->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // echo "Bağlantı başarılı"; // Bunu test ettikten sonra silebilirsin
+} catch (PDOException $e) {
+    die("Veritabanı bağlantı hatası: " . $e->getMessage());
 }
 ?>

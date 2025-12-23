@@ -282,9 +282,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <section class="booking-section section-padding" id="booking-section">
                     <div class="container">
                         <div class="row">
+                            <?php if (!empty($mesaj)) { echo $mesaj; } ?>
 
                             <div class="col-lg-10 col-12 mx-auto">
-                                <form action="#" method="post" class="custom-form booking-form" id="bb-booking-form" role="form">
+                                <form action="#booking-section" method="post" class="custom-form booking-form" id="bb-booking-form" role="form">
                                     <div class="text-center mb-5">
                                         <h2 class="mb-1">Randevu Ayarla </h2>
 

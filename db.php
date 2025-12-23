@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'berber_db';
+$dbname = 'barber_db';
 $username = 'root'; // Veritabanı kullanıcı adın
 $password = '';     // Veritabanı şifren
 

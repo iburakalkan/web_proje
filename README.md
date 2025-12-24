@@ -1,115 +1,84 @@
-# [Projenizin Adı] - Modern Berber Randevu Sistemi
+#  Barber - Randevu Otomasyon Sistemi
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Project Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat-square)](https://github.com/[KullanıcıAdınız]/[RepoAdınız])
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
+<div align="center">
+  <img src="images/templatemo-barber-logo.png" alt="Barber Shop Logo" width="200">
+  <br><br>
+  
+  ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)
+  ![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+  ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+  ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+</div>
 
-> **Berber deneyimini dijitalleştiren, müşteriler ve işletmeler için pratik web çözümü.**
+<br>
 
-[Canlı Demo'yu Görüntüle (Varsa Link)] | [Hata Bildir](https://github.com/[KullanıcıAdınız]/[RepoAdınız]/issues)
+## 📖 Proje Hakkında
+**Gentlemen's Barber Shop**, modern web teknolojileri kullanılarak geliştirilmiş dinamik bir randevu ve yönetim sistemidir. Müşterilerin şube seçimi yaparak, diledikleri tarih ve saat için kolayca randevu alabilmelerini sağlar.
 
----
+Proje, **Single Page Application (SPA)** hissi veren AJAX yapısı ve güvenli **PDO** veritabanı bağlantısı ile hem hızlı hem de güvenli bir kullanıcı deneyimi sunar.
 
-## 📖 İçindekiler
+## ✨ Öne Çıkan Özellikler
 
-* [Proje Hakkında](#-proje-hakkında)
-* [Özellikler](#-özellikler)
-* [Ekran Görüntüleri](#-ekran-görüntüleri)
-* [Kullanılan Teknolojiler](#-kullanılan-teknolojiler)
-* [Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
-* [Kullanım](#-kullanım)
-* [Gelecek Planları (Roadmap)](#-gelecek-planları-roadmap)
-* [İletişim](#-iletişim)
+* **⚡ AJAX ile Kesintisiz Deneyim:** Randevu formu gönderildiğinde sayfa yenilenmez, kullanıcıya anlık bildirim (Success/Error mesajları) gösterilir.
+* **🔒 Güvenli Veritabanı Mimarisi:** PHP PDO (PHP Data Objects) kullanılarak SQL Injection saldırılarına karşı tam koruma sağlanmıştır.
+* **📱 Responsive Tasarım:** Bootstrap 5 ile geliştirilen arayüz, mobil, tablet ve masaüstü cihazlarda kusursuz çalışır.
+* **✅ Regex Validasyon:** Telefon numaraları `5xxxxxxxxx` formatında otomatik olarak temizlenir ve doğrulanır. Hatalı girişler sunucu tarafında engellenir.
+* **📂 Modüler Yapı:** Veritabanı bağlantısı (`db.php`) ve işlem dosyaları (`booking.php`) ayrılarak kodun okunabilirliği artırılmıştır.
 
----
+## 🛠️ Kullanılan Teknolojiler
 
-## 💈 Proje Hakkında
+| Alan | Teknoloji | Açıklama |
+| :--- | :--- | :--- |
+| **Backend** | PHP | Sunucu taraflı işlemler ve mantıksal kontroller. |
+| **Veritabanı** | MySQL | Müşteri ve randevu kayıtlarının tutulması. |
+| **Frontend** | HTML5 & CSS3 | Sayfa iskeleti ve özel stiller (`Unbounded` fontu). |
+| **Framework** | Bootstrap 5 | Responsive grid yapısı ve bileşenler. |
+| **Scripting** | JavaScript (AJAX) | Asenkron veri transferi ve DOM manipülasyonu. |
 
-**[Projenizin Adı]**, geleneksel berber randevu süreçlerini modernize etmek amacıyla geliştirilmiş tam kapsamlı bir web uygulamasıdır.
+## 🚀 Kurulum Adımları
 
-Günümüzde telefonla randevu alma karmaşası hem müşteriler için zaman kaybı hem de işletmeler için yönetim zorluğu yaratmaktadır. Bu proje, müşterilerin 7/24 diledikleri berberden, istedikleri hizmet için randevu alabilmelerini sağlarken; işletme sahiplerine personellerini, hizmetlerini ve takvimlerini tek bir panelden yönetme imkanı sunar.
+Projeyi kendi bilgisayarınızda (localhost) çalıştırmak için şu adımları izleyin:
 
-Bu proje, modern web geliştirme pratikleri ve kullanıcı deneyimi (UX) prensipleri göz önünde bulundurularak [Frontend Framework Adı] ve [Backend Framework Adı] kullanılarak geliştirilmiştir.
+1.  **Projeyi Klonlayın:**
+    ```bash
+    git clone [https://github.com/KULLANICI_ADINIZ/REPO_ADINIZ.git](https://github.com/KULLANICI_ADINIZ/REPO_ADINIZ.git)
+    ```
 
----
+2.  **Veritabanını Oluşturun:**
+    * phpMyAdmin veya MySQL Workbench açın.
+    * `barber_db` adında bir veritabanı oluşturun.
+    * Aşağıdaki SQL kodunu çalıştırarak tabloyu oluşturun:
 
-## ✨ Özellikler
+    ```sql
+    CREATE TABLE randevular (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        ad_soyad VARCHAR(100) NOT NULL,
+        telefon VARCHAR(15) NOT NULL,
+        randevu_saati VARCHAR(10) NOT NULL,
+        sube VARCHAR(50) NOT NULL,
+        randevu_tarihi DATE NOT NULL,
+        kisi_sayisi INT DEFAULT 1,
+        mesaj TEXT,
+        olusturulma_tarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    ```
 
-Bu uygulama iki ana kullanıcı tipi için geliştirilmiştir: **Müşteriler** ve **Yönetici/Berberler**.
+3.  **Veritabanı Ayarlarını Yapın:**
+    * `db.php` dosyasını açın ve kendi yerel sunucu bilgilerinizi girin:
+    ```php
+    $username = 'root'; // Genellikle root
+    $password = '';     // Şifreniz (varsa)
+    ```
 
-**🧑‍🦰 Müşteriler İçin:**
-* **Kolay Randevu:** Müsaitlik durumuna göre tarih ve saat seçimi.
-* **Personel Seçimi:** Favori berberi seçebilme imkanı.
-* **Hizmet Filtreleme:** Saç kesimi, sakal tıraşı, bakım gibi hizmetleri ve fiyatlarını görüntüleme.
-* **Randevu Yönetimi:** Geçmiş ve gelecek randevuları görüntüleme, iptal etme.
-* **Mobil Uyumlu Arayüz:** Telefon ve tabletlerde sorunsuz kullanım.
-
-**👨‍💼 Yönetici ve Berberler İçin:**
-* **Yönetim Paneli (Dashboard):** Günlük/Haftalık randevu takvimi ve istatistikler.
-* **Personel Yönetimi:** Yeni berber ekleme, çalışma saatlerini ve izin günlerini düzenleme.
-* **Hizmet ve Fiyatlandırma:** Sunulan hizmetleri ve ücretlerini güncelleme.
-* **Randevu Kontrolü:** Randevuları onaylama, reddetme veya düzenleme.
-
----
+4.  **Çalıştırın:**
+    * XAMPP veya WAMP sunucunuzu başlatın.
+    * Tarayıcıda `http://localhost/proje-klasoru` adresine gidin.
 
 ## 📸 Ekran Görüntüleri
 
-Projenin arayüzünden bazı kareler.
-
-*(Not: Buraya projenizin "assets" veya "screenshots" klasörüne yüklediğiniz görsellerin yollarını ekleyin. Örnekler aşağıdadır. Kendi resimlerinizi eklediğinizde https://via.placeholder.com... linklerini silip yerine kendi dosya yolunuzu yazın. Örn: /screenshots/anasayfa.png)*
-
-| Ana Sayfa / Randevu Alma | Yönetici Paneli / Takvim |
+| Ana Sayfa | Randevu Formu |
 | :---: | :---: |
-| ![Ana Sayfa Screenshot](https://via.placeholder.com/400x300?text=Ana+Sayfa+Goruntusu) | ![Admin Panel Screenshot](https://via.placeholder.com/400x300?text=Admin+Takvim+Goruntusu) |
-| *Kullanıcı dostu randevu ekranı.* | *Berberler için detaylı takvim görünümü.* |
+| <img src="images/client-doing-hair-cut-barber-shop-salon.jpg" width="400"> | <img src="images/vintage-chair-barbershop.jpg" width="400"> |
 
-| Hizmet Seçimi | Mobil Görünüm |
-| :---: | :---: |
-| ![Hizmetler Screenshot](https://via.placeholder.com/400x300?text=Hizmet+Secim+Ekrani) | ![Mobil Screenshot](https://via.placeholder.com/200x350?text=Mobil+Gorunum) |
-| *Şeffaf fiyatlandırma ve hizmetler.* | *Tüm cihazlarda kusursuz deneyim.* |
 
----
-
-## 🛠 Kullanılan Teknolojiler
-
-Proje geliştirilirken aşağıdaki modern teknolojiler ve kütüphaneler kullanılmıştır.
-
-*(Not: Aşağıdaki rozetleri projenizde gerçekten kullandığınız teknolojilerle değiştirin. Kullanmadıklarınızı silin.)*
-
-**Frontend (Ön Yüz):**
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
-![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
-
-**Backend (Arka Yüz):**
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
-![Python Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
-
-**Veritabanı:**
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/postgresql-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-
-**Diğer Araçlar:**
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-
----
-
-## 💻 Kurulum ve Çalıştırma
-
-Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin.
-
-**Ön Gereksinimler:**
-* [Node.js](https://nodejs.org/) (Sürüm X.X.X veya üzeri)
-* [Veritabanı Adı] (Yerelinizde kurulu ve çalışıyor olmalı)
-* [Diğer gereksinimler...]
-
-**Adım 1: Depoyu Klonlayın**
-```bash
-git clone [https://github.com/](https://github.com/)[KullanıcıAdınız]/[RepoAdınız].git
-cd [RepoAdınız]
+*Bu proje eğitim amaçlı geliştirilmiştir.*

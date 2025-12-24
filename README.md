@@ -80,10 +80,5 @@ Projeyi kendi bilgisayarınızda (localhost) çalıştırmak için şu adımlar�
 | :---: | :---: |
 | <img src="images/client-doing-hair-cut-barber-shop-salon.jpg" width="400"> | <img src="images/vintage-chair-barbershop.jpg" width="400"> |
 
-## 📞 İletişim
 
-Geliştirici: **[Adınız Soyadınız]** E-posta: [mail@adresiniz.com]  
-LinkedIn: [linkedin-profiliniz]
-
----
 *Bu proje eğitim amaçlı geliştirilmiştir.*

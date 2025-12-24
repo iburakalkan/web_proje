@@ -1,4 +1,10 @@
+<?php
+include 'db.php';
 
+// Şubeleri veritabanından çekip hazırlıyoruz
+$subeSorgusu = $pdo->query("SELECT * FROM subeler");
+$subeler = $subeSorgusu->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!doctype html>
 <html lang="tr">
     <head>
@@ -8,7 +14,9 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Gentlemen's Barber Shop - HTML CSS Template</title>
+        <link rel="icon" href="images/templatemo-barber-logo.png" type="image/png">
+
+        
 
               
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,6 +75,10 @@
                             <li class="nav-item">
                                 <a class="nav-link click-scroll" href="#section_5">İletişim</a>
                             </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="proje_hakkında.php">proje hakkında </a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -91,9 +103,9 @@
                             <div class="custom-block d-lg-flex flex-column justify-content-center align-items-center">
                                 <img src="images/vintage-chair-barbershop.jpg" class="custom-block-image img-fluid" alt="">
 
-                                <h4><strong class="text-white">Hurry Up! Get good haircut.</strong></h4>
+                                <h4><strong class="text-white">hızlı randevu</strong></h4>
 
-                                <a href="#booking-section" class="smoothscroll btn custom-btn custom-btn-italic mt-3">Book a seat</a>
+                                <a href="#booking-section" class="smoothscroll btn custom-btn custom-btn-italic mt-3">randevu al!</a>
                             </div>
                     </section>
 
@@ -103,10 +115,10 @@
                             <div class="row">
 
                                 <div class="col-lg-12 col-12 mx-auto">
-                                    <h2 class="mb-4">Best hairdressers</h2>
+                                    <h2 class="mb-4"></h2>
 
                                     <div class="border-bottom pb-3 mb-5">
-                                        <p>Gentlemen's Barber Shop is new Bootstrap v5 HTML CSS template by <a href="https://templatemo.com/page/1" target="_blank">TemplateMo</a> for everyone. There is a sidebar menu to navigate the one-page layout. You can feel free to adapt this template for your business.</p>
+                                        
                                     </div>
                                 </div>
 
@@ -248,48 +260,47 @@
                                 <div id="js-message-container"></div>
                                 <form action="#booking-section" method="post" class="custom-form booking-form" id="bb-booking-form" role="form">
                                     <div class="text-center mb-5">
-                                        <h2 class="mb-1">Randevu Ayarla </h2>
-
-                                        <p>Lütfen formu doldurun size geri dönüş yapacağız</p>
+                                        <h2>Randevu Al</h2>
+                                        <p>lütfen formu eksiksiz doldurun</p>
                                     </div>
-
                                     <div class="booking-form-body">
                                         <div class="row">
-
                                             <div class="col-lg-6 col-12">
-                                                <input type="text" name="bb-name" id="bb-name" class="form-control" placeholder="İsim ve Soyisim" required>
+                                                <input type="text" name="bb-name" id="bb-name" class="form-control" placeholder="İsim Soyisim" required>
                                             </div>
-
                                             <div class="col-lg-6 col-12">
-                                                <input type="tel" class="form-control" name="bb-phone" placeholder="5xxxxxxxxx (Örn: 5301234567)" pattern="5[0-9]{9}" required="">
+                                                <input class="form-control" type="tel" name="bb-phone" id="bb-phone" placeholder="5xxxxxxxxx (Örn: 5301234567)" pattern="5[0-9]{9}"  required>
                                             </div>
-                                        
                                             <div class="col-lg-6 col-12">
-                                                <input class="form-control" type="time" name="bb-time" value="18:30" />
+                                                <input class="form-control" type="time" id="bb-time" name="bb-time" value="18:30"/>
                                             </div>
-
                                             <div class="col-lg-6 col-12">
-                                                <select class="form-select form-control" name="bb-branch" id="bb-branch" aria-label="Default select example">
-                                                    <option selected="">şube seçimi</option>
-                                                    <option value="Kadıköy">Kadıköy</option>
-                                                    <option value="Beyoğlu/istiklal">Beyoğlu/istiklal</option>
-                                                    <option value="Beyoğlu/Cumhuriyet">Beyoğlu/Cumhuriyet</option>
+                                                <select class="form-select" id="bb-branch" name="bb-branch" required>
+                                                    <option value="" disabled selected>Şube Seçiniz</option>
+                                                    <?php foreach ($subeler as $sube): ?>
+                                                        <option value="<?php echo $sube['id']; ?>">
+                                                            <?php echo htmlspecialchars($sube['ad']); ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
                                                 </select>
-
                                             </div>
-                                            <div class="col-lg-6 col-12">
-                                                <input type="date" name="bb-date" id="bb-date" class="form-control" placeholder="Date" required>
+                                            <div class="col-lg-6 col-12 mt-4">
+                                                <select class="form-select" id="bb-berber" name="bb-berber" required disabled>
+                                                    <option value="" disabled selected>Önce Şube Seçiniz</option>
+                                                </select>
                                             </div>
-
-                                            <div class="col-lg-6 col-12">
-                                                <input type="number" name="bb-number" id="bb-number" class="form-control" placeholder="kaç kişi geleçeksiniz" required>
+                                            <div class="col-lg-6 col-12 mt-4">
+                                                <input type="date" name="bb-date" id="bb-date" class="form-control" required>
                                             </div>
+                                            <div class="col-lg-6 col-12 mt-4">
+                                                <input type="number" name="bb-number" id="bb-number" class="form-control" placeholder="Kişi Sayısı" min="1" max="10" value="1">
+                                            </div>
+                                        </div> 
+                                        <div class ="col-lg-12 col-12 ">
+                                            <textarea name="bb-message" id="bb-message" rows="3" class="form-control" placeholder="eklemek istedikleriniz..."></textarea>
                                         </div>
-
-                                        <textarea name="bb-message" rows="3" class="form-control" id="bb-message" placeholder="Yorum "></textarea>
-
-                                        <div class="col-lg-4 col-md-10 col-8 mx-auto">
-                                            <button type="submit" class="form-control">Gönder</button>
+                                        <div class="col-lg-4 col-md-10 col-8 mx-auto mt-3">
+                                            <button type="submit" class="form-control" >Randevu Al</button>
                                         </div>
                                     </div>
                                 </form>
@@ -357,6 +368,7 @@
                             </div>
                         </div>
                     </section>
+                  
 
 
                 <section class="contact-section" id="section_5">
@@ -477,6 +489,7 @@
                         </div>
                     </div>
                 </section>
+                
 
                 <footer class="site-footer">
                     <div class="container">
@@ -524,6 +537,7 @@
                     </div>
                 </footer>
             </div>
+             
 
         <!-- JAVASCRIPT FILES -->
         <script src="js/jquery.min.js"></script>
@@ -533,49 +547,76 @@
     
             <!-- AJAX İLE FORM GÖNDERİMİ -->
         <script>
-    
-    const bookingForm = document.getElementById('bb-booking-form');
-    const messageContainer = document.getElementById('js-message-container');
+            $(document).ready(function(){ 
+                $('#bb-branch').change(function(){
+                    var branchId = $(this).val();
+                    var berberKutusu=$('#bb-berber');
+                    berberKutusu.html('<option>Yükleniyor...</option>').prop('disabled', true);
+                    $.ajax({
+                        type: 'POST',
+                        url: 'get_berberler.php',
+                        data: {sube_id:branchId},
+                        dataType: 'json',
+                        success: function(gelenVeri){
+                            var secenekler='<option value="" disabled selected>Berber Seçiniz</option>';
+                            $.each(gelenVeri, function(index, berber){
+                                secenekler += '<option value="' + berber.id + '">' + berber.ad_soyad + '</option>';
+                            });
+                            berberKutusu.html(secenekler).prop('disabled', false);
+                        },
+                        error: function(){
+                            berberKutusu.html('<option value="" disabled>Berberler yüklenemedi</option>');
+                        }
+                    })
+                })
 
-    bookingForm.addEventListener('submit', function(e) {
-        
-        e.preventDefault();
+            });
 
-        
-        const formData = new FormData(bookingForm);
-
-        
-        messageContainer.innerHTML = '<div class="alert alert-info">İşleminiz yapılıyor, lütfen bekleyin...</div>';
-
-        
-        fetch('booking.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json()) 
-        .then(data => {
             
-            if (data.status === 'success') {
-                
-                messageContainer.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
-                bookingForm.reset(); 
 
-                setTimeout(function(){
-                    messageContainer.innerHTML = '';
-                }, 5000);
+        
+            const bookingForm = document.getElementById('bb-booking-form');
+            const messageContainer = document.getElementById('js-message-container');
+
+            bookingForm.addEventListener('submit', function(e) {
                 
-            } else {
+                e.preventDefault();
+
                 
-                messageContainer.innerHTML = '<div class="alert alert-danger">' + data.message + '</div>';
-            }
-        })
-        .catch(error => {
-            
-            console.error('Hata:', error);
-            messageContainer.innerHTML = '<div class="alert alert-danger">Bir bağlantı hatası oluştu.</div>';
-        });
-    });
-</script>
+                const formData = new FormData(bookingForm);
+
+                
+                messageContainer.innerHTML = '<div class="alert alert-info">İşleminiz yapılıyor, lütfen bekleyin...</div>';
+
+                
+                fetch('booking.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json()) 
+                .then(data => {
+                    
+                    if (data.status === 'success') {
+                        
+                        messageContainer.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
+                        bookingForm.reset(); 
+
+                        setTimeout(function(){
+                            messageContainer.innerHTML = '';
+                        }, 5000);
+                        
+                    } else {
+                        
+                        messageContainer.innerHTML = '<div class="alert alert-danger">' + data.message + '</div>';
+                    }
+                })
+                .catch(error => {
+                    
+                    console.error('Hata:', error);
+                    messageContainer.innerHTML = '<div class="alert alert-danger">Bir bağlantı hatası oluştu.</div>';
+                });
+            });
+        </script>
     
 
         

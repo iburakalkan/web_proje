@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'barber_db';
+$dbname = 'barberr_db';
 $username = 'root';
 $password = '';     
 

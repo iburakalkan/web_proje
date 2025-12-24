@@ -1,42 +1,3 @@
-<?php
-include 'db.php';
-
-$mesaj = "";
-
-// Form gönderildi mi kontrol et
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Form verilerini al ve güvenli hale getir
-    $ad = htmlspecialchars($_POST['bb-name']);
-    $tel = htmlspecialchars($_POST['bb-phone']);
-    $saat = htmlspecialchars($_POST['bb-time']);
-    $sube = htmlspecialchars($_POST['bb-branch']);
-    $tarih = htmlspecialchars($_POST['bb-date']);
-    $kisi = htmlspecialchars($_POST['bb-number']);
-    $not = htmlspecialchars($_POST['bb-message']);
-
-    // Veritabanına ekleme sorgusu
-    $sql = "INSERT INTO randevular (ad_soyad, telefon, randevu_saati, sube, randevu_tarihi, kisi_sayisi, mesaj) 
-            VALUES (:ad, :tel, :saat, :sube, :tarih, :kisi, :not)";
-    
-    $stmt = $pdo->prepare($sql);
-    
-    $sonuc = $stmt->execute([
-        ':ad' => $ad,
-        ':tel' => $tel,
-        ':saat' => $saat,
-        ':sube' => $sube,
-        ':tarih' => $tarih,
-        ':kisi' => $kisi,
-        ':not' => $not
-    ]);
-
-    if ($sonuc) {
-        $mesaj = "<div class='alert alert-success'>Randevunuz başarıyla oluşturuldu! Sizi arayacağız.</div>";
-    } else {
-        $mesaj = "<div class='alert alert-danger'>Bir hata oluştu, lütfen tekrar deneyin.</div>";
-    }
-}
-?>
 
 <!doctype html>
 <html lang="tr">
@@ -49,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <title>Gentlemen's Barber Shop - HTML CSS Template</title>
 
-        <!-- CSS FILES -->        
+              
         <link rel="preconnect" href="https://fonts.googleapis.com">
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -159,17 +120,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                                 <ul class="social-icon ms-auto">
                                                     <li class="social-icon-item">
-                                                        <a href="#" class="social-icon-link bi-facebook">
+                                                        <a href="https://www.facebook.com/?locale=tr_TR" class="social-icon-link bi-facebook">
                                                         </a>
                                                     </li>
 
                                                     <li class="social-icon-item">
-                                                        <a href="#" class="social-icon-link bi-instagram">
+                                                        <a href="https://www.instagram.com" class="social-icon-link bi-instagram">
                                                         </a>
                                                     </li>
 
                                                     <li class="social-icon-item">
-                                                        <a href="#" class="social-icon-link bi-whatsapp">
+                                                        <a href="https://www.whatsapp.com/?lang=tr" class="social-icon-link bi-whatsapp">
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -184,12 +145,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                                 <ul class="social-icon ms-auto">
                                                     <li class="social-icon-item">
-                                                        <a href="#" class="social-icon-link bi-facebook">
+                                                        <a href="https://www.facebook.com/?locale=tr_TR" class="social-icon-link bi-facebook">
                                                         </a>
                                                     </li>
 
                                                     <li class="social-icon-item">
-                                                        <a href="#" class="social-icon-link bi-instagram">
+                                                        <a href="https://www.instagram.com" class="social-icon-link bi-instagram">
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -207,11 +168,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="row">
 
                                 <div class="col-lg-10 col-12 mx-auto">
-                                    <h2 class="mb-3">Get 32% Discount</h2>
+                                    <h2 class="mb-3"></h2>
 
-                                    <p>on every second week of the month</p>
+                                    <p></p>
 
-                                    <strong>Promo Code: BarBerMo</strong>
+                                    <strong></strong>
                                 </div>
 
                             </div>
@@ -234,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="services-info d-flex align-items-end">
                                             <h4 class="mb-0">Saç Kesimi</h4>
 
-                                            <strong class="services-thumb-price">36.00₺</strong>
+                                            <strong class="services-thumb-price">360.00₺</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +226,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                 <div class="col-lg-6 col-12">
                                     <div class="services-thumb">
-                                        <img src="images/services/boy-getting-haircut-salon-front-view.jpg" class="services-image img-fluid" alt="">
+                                        <img src="images/services/altın.png" class="services-image img-fluid" alt="">
 
                                         <div class="services-info d-flex align-items-end">
                                             <h4 class="mb-0">çocuk</h4>
@@ -282,9 +243,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <section class="booking-section section-padding" id="booking-section">
                     <div class="container">
                         <div class="row">
-                            <?php if (!empty($mesaj)) { echo $mesaj; } ?>
-
+                                                 
                             <div class="col-lg-10 col-12 mx-auto">
+                                <div id="js-message-container"></div>
                                 <form action="#booking-section" method="post" class="custom-form booking-form" id="bb-booking-form" role="form">
                                     <div class="text-center mb-5">
                                         <h2 class="mb-1">Randevu Ayarla </h2>
@@ -300,7 +261,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             </div>
 
                                             <div class="col-lg-6 col-12">
-                                                <input type="tel" class="form-control" name="bb-phone" placeholder="+90 123 325 84 47" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required="">
+                                                <input type="tel" class="form-control" name="bb-phone" placeholder="5xxxxxxxxx (Örn: 5301234567)" pattern="5[0-9]{9}" required="">
                                             </div>
                                         
                                             <div class="col-lg-6 col-12">
@@ -310,9 +271,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <div class="col-lg-6 col-12">
                                                 <select class="form-select form-control" name="bb-branch" id="bb-branch" aria-label="Default select example">
                                                     <option selected="">şube seçimi</option>
-                                                    <option value="Grünberger">Grünberger</option>
-                                                    <option value="Behrenstraße">Behrenstraße</option>
-                                                    <option value="Weinbergsweg">Weinbergsweg</option>
+                                                    <option value="Kadıköy">Kadıköy</option>
+                                                    <option value="Beyoğlu/istiklal">Beyoğlu/istiklal</option>
+                                                    <option value="Beyoğlu/Cumhuriyet">Beyoğlu/Cumhuriyet</option>
                                                 </select>
 
                                             </div>
@@ -367,14 +328,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             </h6>
                                         </div>
 
-                                        <div class="price-list-thumb">
-                                            <h6 class="d-flex">
-                                                jilet Tıraşı
-                                                <span class="price-list-thumb-divider"></span>
-
-                                                <strong>360 ₺</strong>
-                                            </h6>
-                                        </div>
+                                     
 
                                         <div class="price-list-thumb">
                                             <h6 class="d-flex">
@@ -406,16 +360,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
                 <section class="contact-section" id="section_5">
-                    <div class="section-padding section-bg">
-                        <div class="container">
-                            <div class="row">   
-
-                                <div class="col-lg-8 col-12 mx-auto">
-                                    <h2 class="text-center">Merhaba</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
 
                     <div class="section-padding">
                         <div class="container">
@@ -437,45 +382,92 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </a>
                                     </p>
 
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-facebook">
-                                            </a>
-                                        </li>
-            
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-twitter">
-                                            </a>
-                                        </li>
-            
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-instagram">
-                                            </a>
-                                        </li>
+                                    <?php
+                                        // Sosyal medya linklerini ve ikon sınıflarını bir dizide tutuyoruz
+                                        $social_links = [
+                                            [
+                                                'url' => 'https://www.facebook.com/?locale=tr_TR',
+                                                'icon' => 'bi-facebook',
+                                                'name' => 'Facebook'
+                                            ],
+                                            [
+                                                'url' => 'https://twitter.com',
+                                                'icon' => 'bi-twitter',
+                                                'name' => 'Twitter'
+                                            ],
+                                            [
+                                                'url' => 'https://www.instagram.com',
+                                                'icon' => 'bi-instagram',
+                                                'name' => 'Instagram'
+                                            ],
+                                            [
+                                                'url' => 'https://www.youtube.com',
+                                                'icon' => 'bi-youtube',
+                                                'name' => 'Youtube'
+                                            ],
+                                            [
+                                                'url' => 'https://www.whatsapp.com',
+                                                'icon' => 'bi-whatsapp',
+                                                'name' => 'Whatsapp'
+                                            ]
+                                            ];
+                                                ?>
 
+                                <ul class="social-icon">
+                                    <?php foreach ($social_links as $social): ?>
                                         <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-youtube">
+                                            <a href="<?php echo $social['url']; ?>" 
+                                            class="social-icon-link <?php echo $social['icon']; ?>" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            aria-label="<?php echo $social['name']; ?>">
                                             </a>
                                         </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-whatsapp">
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
 
                                 <div class="col-lg-5 col-12 contact-block-wrap mt-5 mt-lg-0 pt-4 pt-lg-0 mx-auto">
                                     <div class="contact-block">
-                                        <h6 class="mb-0">
+                                        
+                                        <h6 class="d-flex align-items-center mb-3">
                                             <i class="custom-icon bi-shop me-3"></i>
-
-                                            <strong>Açık Günler</strong>
-
+                                            <strong>Pazartesi</strong>
                                             <span class="ms-auto">10:00 - 20:00</span>
                                         </h6>
+
+                                        <h6 class="d-flex align-items-center mb-3">
+                                            <i class="custom-icon bi-shop me-3"></i>
+                                            <strong>Salı</strong>
+                                            <span class="ms-auto">10:00 - 20:00</span>
+                                        </h6>
+
+                                        <h6 class="d-flex align-items-center mb-3">
+                                            <i class="custom-icon bi-shop me-3"></i>
+                                            <strong>Çarşamba</strong>
+                                            <span class="ms-auto">10:00 - 20:00</span>
+                                        </h6>
+
+                                        <h6 class="d-flex align-items-center mb-3">
+                                            <i class="custom-icon bi-shop me-3"></i>
+                                            <strong>Perşembe</strong>
+                                            <span class="ms-auto">10:00 - 20:00</span>
+                                        </h6>
+
+                                        <h6 class="d-flex align-items-center mb-3">
+                                            <i class="custom-icon bi-shop me-3"></i>
+                                            <strong>Cuma</strong>
+                                            <span class="ms-auto">10:00 - 20:00</span>
+                                        </h6>
+
+                                        <h6 class="d-flex align-items-center mb-0">
+                                            <i class="custom-icon bi-shop me-3"></i>
+                                            <strong>Cumartesi</strong>
+                                            <span class="ms-auto">10:00 - 20:00</span>
+                                        </h6>
+
                                     </div>
-                                </div>
+                                 </div>
 
                                 <div class="col-lg-12 col-12 mx-auto mt-5 pt-5">
                                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12269.856681592177!2d30.481266975402843!3d39.7516855898747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cc1643dec1bbd9%3A0x4c836f6ec9d440bb!2sEski%C5%9Fehir%20Osmangazi%20%C3%9Cniversitesi!5e0!3m2!1str!2str!4v1765128966427!5m2!1str!2str" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -521,12 +513,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="site-footer-bottom">
                         <div class="container">
                             <div class="row align-items-center">
-
-                                <!-- <div class="col-lg-8 col-12 mt-4">
-                                    <p class="copyright-text mb-0">Copyright © 2036 Barber Shop 
-                                    - Design: <a href="https://templatemo.com" rel="nofollow" target="_blank">TemplateMo</a></p>
-                                </div> -->
-
                                 <div class="col-lg-2 col-md-3 col-3 mt-lg-4 ms-auto">
                                     <a href="#section_1" class="back-top-icon smoothscroll" title="Back Top">
                                         <i class="bi-arrow-up-circle"></i>
@@ -544,6 +530,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <script src="js/bootstrap.min.js"></script>
         <script src="js/click-scroll.js"></script>
         <script src="js/custom.js"></script>
+    
+            <!-- AJAX İLE FORM GÖNDERİMİ -->
+        <script>
+    
+    const bookingForm = document.getElementById('bb-booking-form');
+    const messageContainer = document.getElementById('js-message-container');
+
+    bookingForm.addEventListener('submit', function(e) {
+        
+        e.preventDefault();
+
+        
+        const formData = new FormData(bookingForm);
+
+        
+        messageContainer.innerHTML = '<div class="alert alert-info">İşleminiz yapılıyor, lütfen bekleyin...</div>';
+
+        
+        fetch('booking.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json()) 
+        .then(data => {
+            
+            if (data.status === 'success') {
+                
+                messageContainer.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
+                bookingForm.reset(); 
+
+                setTimeout(function(){
+                    messageContainer.innerHTML = '';
+                }, 5000);
+                
+            } else {
+                
+                messageContainer.innerHTML = '<div class="alert alert-danger">' + data.message + '</div>';
+            }
+        })
+        .catch(error => {
+            
+            console.error('Hata:', error);
+            messageContainer.innerHTML = '<div class="alert alert-danger">Bir bağlantı hatası oluştu.</div>';
+        });
+    });
+</script>
+    
+
+        
 
     </body>
 </html>

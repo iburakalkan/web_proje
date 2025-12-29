@@ -241,7 +241,7 @@ $subeler = $subeSorgusu->fetchAll(PDO::FETCH_ASSOC);
                                         <img src="images/services/altın.png" class="services-image img-fluid" alt="">
 
                                         <div class="services-info d-flex align-items-end">
-                                            <h4 class="mb-0">çocuk</h4>
+                                            <h4 class="mb-0">Çocuk Tıraşı</h4>
 
                                             <strong class="services-thumb-price">250.00₺</strong>
                                         </div>
@@ -251,62 +251,109 @@ $subeler = $subeSorgusu->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                     </section>
+                        <style>
+                            /* Büyük ekranlarda formun çok yayılmasını engellemek ve tasarımı iyileştirmek için */
+                            .booking-section .container {
+                                max-width: 900px; /* Formun aşırı büyümesini engeller */
+                            }
+                            .booking-form-body {
+                                background: #ffffff;
+                                padding: 40px;
+                                border-radius: 20px;
+                                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+                            }
+                            .custom-form .form-control, .custom-form .form-select {
+                                border-radius: 10px;
+                                margin-bottom: 5px;
+                                border: 1px solid #eee;
+                                transition: all 0.3s;
+                            }
+                            .custom-form .form-control:focus, .custom-form .form-select:focus {
+                                border-color: #592727; /* Temanıza uygun renk */
+                                box-shadow: 0 0 10px rgba(89, 39, 39, 0.1);
+                            }
+                            .booking-form-body label {
+                                font-weight: 500;
+                                margin-bottom: 8px;
+                                color: #333;
+                                font-size: 0.9rem;
+                            }
+                        </style>
 
                     <section class="booking-section section-padding" id="booking-section">
-                    <div class="container">
-                        <div class="row">
-                                                 
-                            <div class="col-lg-10 col-12 mx-auto">
-                                <div id="js-message-container"></div>
-                                <form action="#booking-section" method="post" class="custom-form booking-form" id="bb-booking-form" role="form">
-                                    <div class="text-center mb-5">
-                                        <h2>Randevu Al</h2>
-                                        <p>lütfen formu eksiksiz doldurun</p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 mx-auto">
+                                        <div id="js-message-container"></div>
+                                        
+                                        <form action="#booking-section" method="post" class="custom-form booking-form" id="bb-booking-form" role="form">
+                                            <div class="text-center mb-5">
+                                                <h2 class="mb-2">Randevu Al</h2>
+                                                <p class="text-muted">Lütfen formu eksiksiz doldurun, sizinle iletişime geçelim.</p>
+                                            </div>
+
+                                            <div class="booking-form-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-12 mb-3">
+                                                        <label for="bb-name">Ad Soyad</label>
+                                                        <input type="text" name="bb-name" id="bb-name" class="form-control" placeholder="Örn: Ahmet Yılmaz" required>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-12 mb-3">
+                                                        <label for="bb-phone">Telefon Numarası</label>
+                                                        <input class="form-control" type="tel" name="bb-phone" id="bb-phone" placeholder="5xxxxxxxxx" pattern="5[0-9]{9}" required>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-12 mb-3">
+                                                        <label for="bb-branch">Şube Seçimi</label>
+                                                        <select class="form-select" id="bb-branch" name="bb-branch" required>
+                                                            <option value="" disabled selected>Şube Seçiniz</option>
+                                                            <?php foreach ($subeler as $sube): ?>
+                                                                <option value="<?php echo $sube['id']; ?>">
+                                                                    <?php echo htmlspecialchars($sube['ad']); ?>
+                                                                </option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-12 mb-3">
+                                                        <label for="bb-berber">Berber Seçimi</label>
+                                                        <select class="form-select" id="bb-berber" name="bb-berber" required disabled>
+                                                            <option value="" disabled selected>Önce Şube Seçiniz</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-12 mb-3">
+                                                        <label for="bb-date">Tarih</label>
+                                                        <input type="date" name="bb-date" id="bb-date" class="form-control" required>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-12 mb-3">
+                                                        <label for="bb-time">Saat</label>
+                                                        <input class="form-control" type="time" id="bb-time" name="bb-time" value="10:00"/>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-12 mb-3">
+                                                        <label for="bb-number">Kişi Sayısı</label>
+                                                        <input type="number" name="bb-number" id="bb-number" class="form-control" min="1" max="10" value="1">
+                                                    </div>
+
+                                                    <div class="col-12 mb-4">
+                                                        <label for="bb-message">Notunuz (İsteğe Bağlı)</label>
+                                                        <textarea name="bb-message" id="bb-message" rows="3" class="form-control" placeholder="Eklemek istediğiniz bir not var mı?"></textarea>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-md-8 col-10 mx-auto">
+                                                        <button type="submit" class="form-control btn custom-btn">Randevu Oluştur</button>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="booking-form-body">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-12">
-                                                <input type="text" name="bb-name" id="bb-name" class="form-control" placeholder="İsim Soyisim" required>
-                                            </div>
-                                            <div class="col-lg-6 col-12">
-                                                <input class="form-control" type="tel" name="bb-phone" id="bb-phone" placeholder="5xxxxxxxxx (Örn: 5301234567)" pattern="5[0-9]{9}"  required>
-                                            </div>
-                                            <div class="col-lg-6 col-12">
-                                                <input class="form-control" type="time" id="bb-time" name="bb-time" value="18:30"/>
-                                            </div>
-                                            <div class="col-lg-6 col-12">
-                                                <select class="form-select" id="bb-branch" name="bb-branch" required>
-                                                    <option value="" disabled selected>Şube Seçiniz</option>
-                                                    <?php foreach ($subeler as $sube): ?>
-                                                        <option value="<?php echo $sube['id']; ?>">
-                                                            <?php echo htmlspecialchars($sube['ad']); ?>
-                                                        </option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-6 col-12 mt-4">
-                                                <select class="form-select" id="bb-berber" name="bb-berber" required disabled>
-                                                    <option value="" disabled selected>Önce Şube Seçiniz</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-6 col-12 mt-4">
-                                                <input type="date" name="bb-date" id="bb-date" class="form-control" required>
-                                            </div>
-                                            <div class="col-lg-6 col-12 mt-4">
-                                                <input type="number" name="bb-number" id="bb-number" class="form-control" placeholder="Kişi Sayısı" min="1" max="10" value="1">
-                                            </div>
-                                        </div> 
-                                        <div class ="col-lg-12 col-12 ">
-                                            <textarea name="bb-message" id="bb-message" rows="3" class="form-control" placeholder="eklemek istedikleriniz..."></textarea>
-                                        </div>
-                                        <div class="col-lg-4 col-md-10 col-8 mx-auto mt-3">
-                                            <button type="submit" class="form-control" >Randevu Al</button>
-                                        </div>
-                                    </div>
-                                </form>
-                        </div>
-                    </div>
-                </section>
+                                </div>
+                            </div>
+                    </section>
+ 
 
 
                     <section class="price-list-section section-padding" id="section_4">
@@ -539,13 +586,13 @@ $subeler = $subeSorgusu->fetchAll(PDO::FETCH_ASSOC);
             </div>
              
 
-        <!-- JAVASCRIPT FILES -->
+        
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/click-scroll.js"></script>
         <script src="js/custom.js"></script>
     
-            <!-- AJAX İLE FORM GÖNDERİMİ -->
+            
         <script>
             $(document).ready(function(){ 
                 $('#bb-branch').change(function(){

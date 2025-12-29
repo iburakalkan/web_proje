@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Proje Detayları</title>
+        <title>Proje Detayları | Barber Shop</title>
         <link rel="icon" href="images/templatemo-barber-logo.png" type="image/png">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,40 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap-icons.css" rel="stylesheet">
         <link href="css/templatemo-barber-shop.css" rel="stylesheet">
+        
+        <style>
+            .tech-card {
+                border: none;
+                background: #f8f9fa;
+                transition: transform 0.3s;
+                border-radius: 15px;
+            }
+            .tech-card:hover {
+                transform: translateY(-5px);
+                background: #fff;
+                shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .video-container {
+                position: relative;
+                padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+                height: 0;
+                overflow: hidden;
+                border-radius: 20px;
+                box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            }
+            .video-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            .badge-tech {
+                background-color: #592727; /* Berber dükkanının temasına uygun bir renk */
+                color: white;
+                margin-right: 5px;
+            }
+        </style>
     </head>
     
     <body>
@@ -29,50 +63,59 @@
                         <div class="row justify-content-center">
 
                             <div class="col-lg-10 col-12">
-                                <h2 class="mb-4">Proje Hakkında</h2>
-                                <p class="lead mb-4">Bu proje, dinamik veri yönetimi ve kullanıcı etkileşimi üzerine kurulu web tabanlı bir randevu sistemidir.</p>
-
-                                <div class="mb-5 text-center">
-                                    <img src="images/mysql.png  " class="img-fluid rounded shadow" alt="Proje Görseli" >
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-4">
-                                        <h4 class="mb-3 text-warning">Kullanılan Diller & Araçlar</h4>
-                                        <ul class="list-group list-group-flush bg-transparent">
-                                            <li class="list-group-item bg-transparent text-muted ps-0">
-                                                <i class="bi-code-slash text-dark me-2"></i> <strong>Backend:</strong> PHP ve MySQL (PDO)
-                                            </li>
-                                            <li class="list-group-item bg-transparent text-muted ps-0">
-                                                <i class="bi-window-fullscreen text-dark me-2"></i> <strong>Frontend:</strong> HTML5, CSS3, Bootstrap 5
-                                            </li>
-                                            <li class="list-group-item bg-transparent text-muted ps-0">
-                                                <i class="bi-layers text-dark me-2"></i> <strong>Script:</strong> JavaScript (jQuery)
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="col-md-6 mb-4">
-                                        <h4 class="mb-3 text-warning">Sistem Özellikleri</h4>
-                                        <ul class="list-group list-group-flush bg-transparent">
-                                            <li class="list-group-item bg-transparent text-muted ps-0">
-                                                <i class="bi-arrow-repeat text-dark me-2"></i> 
-                                                <strong>AJAX Etkileşimi:</strong> Şube seçildiğinde sayfa yenilenmeden berber listesi dinamik olarak güncellenir.
-                                            </li>
-                                            <li class="list-group-item bg-transparent text-muted ps-0">
-                                                <i class="bi-diagram-3 text-dark me-2"></i> 
-                                                <strong>İlişkisel Veritabanı:</strong> Şubeler, berberler ve randevular ID'ler üzerinden birbirine bağlıdır.
-                                            </li>
-                                            <li class="list-group-item bg-transparent text-muted ps-0">
-                                                <i class="bi-shield-check text-dark me-2"></i> 
-                                                <strong>Veri Kontrolü:</strong> Form gönderiminde Regex ile telefon doğrulama ve sunucu taraflı kontroller yapılır.
-                                            </li>
-                                        </ul>
-                                    </div>
+                                <div class="text-center mb-5">
+                                    <h2 class="mb-3">Proje Hakkında</h2>
+                                    <p class="lead">Bu çalışma, modern web teknolojilerini kullanarak geliştirilmiş dinamik bir <strong>Berber Randevu Sistemi</strong>dir.</p>
+                                    <img src="images/mysql.png" class="img-fluid rounded" style="max-width: 600px;" alt="MySQL Logo">
                                 </div>
 
-                                <div class="mt-4">
+                                <div class="row mb-5">
+                                    <div class="col-12 mb-4">
+                                        <h4 class="text-warning border-bottom pb-2">Kullanılan Teknolojiler</h4>
+                                    </div>
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card tech-card p-3 h-100">
+                                            <h5 class="card-title"><i class="bi bi-code-square me-2"></i>Frontend</h5>
+                                            <p class="small text-muted">Arayüz tasarımı ve kullanıcı deneyimi için:</p>
+                                            <div>
+                                                <span class="badge badge-tech">HTML5</span>
+                                                <span class="badge badge-tech">CSS3</span>
+                                                <span class="badge badge-tech">Bootstrap 5</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card tech-card p-3 h-100">
+                                            <h5 class="card-title"><i class="bi bi-cpu me-2"></i>Backend</h5>
+                                            <p class="small text-muted">Sunucu taraflı işlemler ve veritabanı yönetimi:</p>
+                                            <div>
+                                                <span class="badge badge-tech">PHP 8.x</span>
+                                                <span class="badge badge-tech">PDO (SQL)</span>
+                                                <span class="badge badge-tech">MySQL</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card tech-card p-3 h-100">
+                                            <h5 class="card-title"><i class="bi bi-lightning-charge me-2"></i>Dinamik Yapı</h5>
+                                            <p class="small text-muted">Sayfa yenilenmeden veri iletişimi için:</p>
+                                            <div>
+                                                <span class="badge badge-tech">JavaScript</span>
+                                                <span class="badge badge-tech">jQuery</span>
+                                                <span class="badge badge-tech">AJAX / JSON</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                                <div class="text-center mt-4">
                                     <a href="https://github.com/iburakalkan/web_proje" target="_blank" class="btn custom-btn smoothscroll me-2">
-                                        <i class="bi-github"></i> Kaynak Kodlar
+                                        <i class="bi-github"></i> GitHub Kaynak Kodları
                                     </a>
                                 </div>
 
